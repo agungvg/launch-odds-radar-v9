@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch-Odds Radar v9 — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="mast">
+  <div class="mast-in">
+    <div class="kicker">MAKE.FUN TOKEN-RADAR-01 &middot; V9 &middot; RADAR-9 MODEL</div>
+    <h1>Launch-Odds Radar</h1>
+    <p class="lede">Which pre-token protocol is worth farming next — ranked by what its token would be worth if the protocol&rsquo;s record stayed as it is, with the net-of-fees verdict and the ten steps to farm it.</p>
+    <p class="meta" id="metaLine">Loading the sealed snapshot&hellip;</p>
+  </div>
+</header>
+<main id="app">
+  <section class="kpis" id="kpis" aria-label="Headline numbers"></section>
+  <section class="panel controls" id="controls" aria-label="Filters">
+    <div class="ctl"><label for="q">Search</label><input id="q" type="search" placeholder="name or slug"></div>
+    <div class="ctl"><label for="cat">Category</label><select id="cat"></select></div>
+    <div class="ctl"><label for="verdict">Verdict</label><select id="verdict"><option value="">All verdicts</option><option value="FARM">FARM only</option><option value="SKIP">SKIP only</option></select></div>
+    <div class="ctl"><label for="sort">Sort by</label><select id="sort"><option value="implied">Implied value &darr;</option><option value="net">Net $ per hour &darr;</option><option value="phigh">P(high ratio) &darr;</option><option value="tvl">TVL &darr;</option><option value="age">Age &darr;</option><option value="impliedAsc">Implied value &uarr;</option></select></div>
+    <div class="ctl slider-ctl"><label for="dep">Deposit size <span id="depLabel" class="dep-label"></span></label><input id="dep" type="range"><div class="slider-note" id="depNote"></div></div>
+    <div class="ctl btns"><button id="csvBtn" type="button">Export CSV</button><button id="jsonBtn" type="button">Export JSON</button></div>
+  </section>
+  <section class="panel" aria-label="Ranked board">
+    <div class="sec-head"><h2>Ranked board</h2><span id="boardCount" class="count"></span></div>
+    <div class="tbl-wrap"><table id="board">
+      <thead><tr><th>#</th><th>Protocol</th><th>Category</th><th>Chains</th><th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th><th class="num">Implied value</th><th class="num">P25&ndash;P75</th><th class="num">P(high)</th><th class="num">Net $</th><th class="num">Net $/h</th><th>Verdict</th></tr></thead>
+      <tbody id="boardBody"></tbody>
+    </table></div>
+    <p class="fine">Click any row for its detail, farm plan and peers. Implied value is the model&rsquo;s claim from the snapshot&rsquo;s own figures — TVL, 7-day growth, age, chains and category group — never a hand-kept list of names. &ldquo;Records no token&rdquo; means DefiLlama&rsquo;s record carries none; it is not proof the protocol has none.</p>
+  </section>
+  <section class="panel" id="detail" aria-label="Protocol detail"></section>
+  <section class="panel" aria-label="Scatter">
+    <div class="sec-head"><h2>Where the value sits</h2><span class="count">log TVL vs log implied value &middot; dot = one board row</span></div>
+    <div id="scatter"></div>
+    <p class="fine">Green dots farm at a profit on the model&rsquo;s net economics; red dots do not. The diagonal is a 1&times; ratio (token worth its TVL); most protocols sit below it.</p>
+  </section>
+  <section class="panel" aria-label="Live tokens">
+    <div class="sec-head"><h2>Already live — the market&rsquo;s own values</h2><span class="count">top 24 by market cap, kept apart from the board</span></div>
+    <div class="tbl-wrap"><table id="live"><thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">Mcap / TVL</th></tr></thead><tbody id="liveBody"></tbody></table></div>
+  </section>
+  <section class="panel" id="evidence" aria-label="Model evidence"></section>
+  <section class="panel" id="integrity" aria-label="Integrity"></section>
+  <footer class="foot">
+    <p>Launch-Odds Radar v9 &middot; model radar-9 &middot; snapshot as-of <span id="footAsOf"></span> &middot; drand anchor round <span id="footAnchor"></span> &middot; wallet 9gXDJHuTGSntcjA6Ent2oabFwxxs6N1yF3NwfypTwFsq</p>
+    <p>Built for the make.fun token-radar-01 bounty. Nothing on this page reaches the network: the whole board, the model evidence and the farm plans are computed from the sealed snapshot at build time and shipped in the page&rsquo;s own data file.</p>
+  </footer>
+</main>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
